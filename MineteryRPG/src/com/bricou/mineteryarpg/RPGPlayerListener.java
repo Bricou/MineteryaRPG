@@ -20,7 +20,14 @@ public class RPGPlayerListener extends PlayerListener {
 	
 	public void onPlayerJoin(PlayerJoinEvent event)
 	{
-		log.info("Connexion de : " + event.getPlayer().getName());
+		log.info("[MineteryaRPG] Connexion de : " + event.getPlayer().getName());
+		//Si le joueur existe, on charge ses infos
+		if (this.plugin.dataLoader.playerExist(event.getPlayer().getName()))
+		{
+			log.info("[MineteryaRPG] Le joueur " + event.getPlayer().getName() + " existe, on charge ses donnees");
+		} else {
+			log.info("[MineteryaRPG] Le joueur " + event.getPlayer().getName() + " n'existe pas dans la base de donnees");
+		}
 	}
 	
 	public void onPlayerQuit(PlayerQuitEvent event)
