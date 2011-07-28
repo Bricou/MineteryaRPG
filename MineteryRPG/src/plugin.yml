@@ -3,6 +3,6 @@ main: com.bricou.mineteryarpg.MineteryaRPG
 version: 0.1
 
 commands:
-    rpghelp:
+    rpgaide:
         description: Affiche l'aide
-        usage: usage /rpghelp
+        usage: usage /rpgaide
