@@ -32,7 +32,7 @@ public class RPGPlayerListener extends PlayerListener {
 	
 	public void onPlayerQuit(PlayerQuitEvent event)
 	{
-		log.info("Deconnexion de : " + event.getPlayer().getName());
+		log.info("[MineteryaRPG] Deconnexion de : " + event.getPlayer().getName());
 	}
 	
 }

@@ -1,3 +1,8 @@
 name: MineteryaRPG
 main: com.bricou.mineteryarpg.MineteryaRPG
 version: 0.1
+
+commands:
+    rpghelp:
+        description: Affiche l'aide
+        usage: usage /rpghelp
