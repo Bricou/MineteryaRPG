@@ -1,5 +1,6 @@
 package com.bricou.mineteryarpg;
 
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import org.bukkit.command.Command;
@@ -16,6 +17,7 @@ public class MineteryaRPG extends JavaPlugin {
 	public RPGPlayerListener playerListener;
 	public DataLoader dataLoader;
 	public RPGCommands rpgCommands;
+	public HashMap<Player, RPGPlayer> rpgPlayers = new HashMap<Player, RPGPlayer>(); // Need explication
 	public Logger log = Logger.getLogger("Minecraft");
 	
 	public void onEnable()

@@ -45,18 +45,25 @@ public class RPGCommands {
 			}
 			else if (args.length == 1)
 			{
-				if (command.equalsIgnoreCase("guerrier"))
+				if (this.plugin.dataLoader.playerExist(player.getName()))
+				{
+					player.sendMessage(ChatColor.AQUA + "Vous avez deja choisi une classe !");
+					return true;
+				}
+				else if (args[0].equalsIgnoreCase("guerrier"))
 				{
 					this.plugin.dataLoader.createPlayer(player.getName(), "guerrier");
 					player.sendMessage(ChatColor.AQUA + "Vous avez choisi la classe guerrier !");
 					return true;
 				}
-				else if (command.equalsIgnoreCase("mage"))
+				else if (args[0].equalsIgnoreCase("mage"))
 				{
 					this.plugin.dataLoader.createPlayer(player.getName(), "mage");
 					player.sendMessage(ChatColor.AQUA + "Vous avez choisi la classe mage !");
 					return true;
 				}
+				player.sendMessage(ChatColor.AQUA + "Cette classe n'éxiste pas !");
+				return false;
 			}
 		}
 		return false;

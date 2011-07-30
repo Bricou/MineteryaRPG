@@ -8,4 +8,4 @@ commands:
         usage: usage /rpgaide
     rpgclasse:
         description: Selection d'une classe
-        usage: usage /classe <nom de la classe>
+        usage: usage /rpgclasse <nom de la classe>

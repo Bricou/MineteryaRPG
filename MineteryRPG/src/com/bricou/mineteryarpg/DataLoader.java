@@ -37,7 +37,7 @@ public class DataLoader {
 			int id = -1;
 			dbConnection = DriverManager.getConnection(dbconn);
 			Statement statement = dbConnection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT `id` FROM `characters` WHERE `name`='" + player + "';");
+			ResultSet rs = statement.executeQuery("SELECT `id` FROM `players` WHERE `name`='" + player + "';");
 			while (rs.next()) 
 			{
 				id = rs.getInt("id");
@@ -66,8 +66,15 @@ public class DataLoader {
 			dbConnection = DriverManager.getConnection(dbconn);
 			Statement statement = dbConnection.createStatement();
 			
+			statement.executeUpdate("INSERT INTO `players` (`id`,`name`,`class`,`experience`,`level`) VALUES (NULL, '" + player + "', '" + classe + "', 0, 0);");
+			statement.close();
+			dbConnection.close();
 		}
-		return false;
+		catch (Exception e) 
+	    {
+			e.printStackTrace();
+	    }
+		return true;
 	}
 	
 }
