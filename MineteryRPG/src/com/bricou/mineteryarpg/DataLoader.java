@@ -60,5 +60,14 @@ public class DataLoader {
 		}
 	}
 	
+	public boolean createPlayer(String player, String classe)
+	{
+		try {
+			dbConnection = DriverManager.getConnection(dbconn);
+			Statement statement = dbConnection.createStatement();
+			
+		}
+		return false;
+	}
 	
 }

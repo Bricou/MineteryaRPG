@@ -6,3 +6,6 @@ commands:
     rpgaide:
         description: Affiche l'aide
         usage: usage /rpgaide
+    rpgclasse:
+        description: Selection d'une classe
+        usage: usage /classe <nom de la classe>
