@@ -12,3 +12,6 @@ commands:
     rpgstats:
         description: Donne les informations d'un joueur
         usage: /rpgstats [joueur]
+    rpghash:
+        description: toto
+        usage: toto

@@ -39,6 +39,7 @@ public class MineteryaRPG extends JavaPlugin {
 			if (this.dataLoader.playerExist(player.getName()))
 			{
 				//On charge les données du joueurs
+				this.dataLoader.playerLoad(player);
 			} else {
 				//Le joueur n'existe pas
 				log.info("[MineteryaRPG] Le joueur " + player.getName() + "n'existe pas dans la base de données");

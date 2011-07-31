@@ -111,9 +111,23 @@ public class DataLoader {
 		}
 	}
 	
-	public void playerSave(String player)
+	public void playerSave(Player player)
 	{
-		
+		try {
+			dbConnection = DriverManager.getConnection(dbconn);
+			Statement statement = dbConnection.createStatement();
+			
+			RPGPlayer rpgPlayer = this.plugin.rpgPlayers.get(player);
+			
+			statement.executeUpdate("UPDATE players SET experience='" + rpgPlayer.getExperience() + "', level='" + rpgPlayer.getLevel() + "' WHERE name='" + rpgPlayer.getName() + "';");
+			
+			statement.close();
+		    dbConnection.close();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 }

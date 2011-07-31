@@ -36,7 +36,8 @@ public class RPGPlayerListener extends PlayerListener {
 		if (this.plugin.dataLoader.playerExist(event.getPlayer().getName()))
 		{
 			log.info("[MineteryaRPG] Sauvegarde de : " + event.getPlayer().getName());
-			this.plugin.dataLoader.playerSave(event.getPlayer().getName());
+			this.plugin.dataLoader.playerSave(event.getPlayer());
+			this.plugin.rpgPlayers.remove(event.getPlayer());
 		}
 	}
 	

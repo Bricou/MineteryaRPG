@@ -73,14 +73,18 @@ public class RPGCommands {
 		{
 			if (args.length == 0)
 			{
-				//On affiche les stats du sender
-				log.info("toto");
-				RPGPlayer rpgPlayer = (RPGPlayer)this.plugin.rpgPlayers.get(player);
-				log.info("titi");
-				player.sendMessage(ChatColor.AQUA + "[MineteryaRPG] Informations personnage");
-				player.sendMessage(ChatColor.AQUA + "Classe : " + rpgPlayer.getClasse());
-				player.sendMessage(ChatColor.AQUA + "Niveau : " + String.valueOf(rpgPlayer.getLevel()));
-				return true;
+				if (this.plugin.dataLoader.playerExist(player.getName()))
+				{
+					//On affiche les stats du sender
+					RPGPlayer rpgPlayer = this.plugin.rpgPlayers.get(player);
+					player.sendMessage(ChatColor.AQUA + "[MineteryaRPG] Informations personnage");
+					player.sendMessage(ChatColor.AQUA + "Classe : " + rpgPlayer.getClasse());
+					player.sendMessage(ChatColor.AQUA + "Niveau : " + String.valueOf(rpgPlayer.getLevel()));
+					return true;
+				} else {
+					player.sendMessage(ChatColor.AQUA + "Vous n'avez pas choisi de classe !");
+					return true;
+				}
 			}
 			else if (args.length == 1)
 			{
@@ -88,6 +92,10 @@ public class RPGCommands {
 				return true;
 			}
 			return false;
+		}
+		else if (command.equalsIgnoreCase("rpghash"))
+		{
+			log.info(this.plugin.rpgPlayers.toString());
 		}
 		return false;
 	}

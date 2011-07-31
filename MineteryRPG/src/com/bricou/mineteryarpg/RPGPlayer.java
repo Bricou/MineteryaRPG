@@ -27,4 +27,14 @@ public class RPGPlayer {
 		return this.playerLevel;
 	}
 	
+	public float getExperience()
+	{
+		return this.playerExperience;
+	}
+	
+	public String getName()
+	{
+		return this.playerName;
+	}
+	
 }
