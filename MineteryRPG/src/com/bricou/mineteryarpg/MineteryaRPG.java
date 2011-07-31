@@ -47,6 +47,7 @@ public class MineteryaRPG extends JavaPlugin
 		// Enregistrement des events
 		pluginManager.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
 		pluginManager.registerEvent(Type.PLAYER_QUIT, playerListener, Priority.Normal, this);
+		pluginManager.registerEvent(Type.ENTITY_DEATH, playerListener, Priority.Normal, this);
 
 		// On charge les données de joueurs déjà connectés
 		for (Player player : getServer().getOnlinePlayers())
@@ -74,10 +75,17 @@ public class MineteryaRPG extends JavaPlugin
 	 */
 	public void onDisable()
 	{
-		log.info("[MineteryaRPG] Désactivation du plugin");
+		log.info("[MineteryaRPG] Desactivation du plugin");
 		
-		// Fin de désactivation du plugin
-		log.info("[MineteryaRPG] Le plugin est désactivé");
+		// On parcours la liste des RPGPlayer pour les sauvegarder et les decharger
+		for (RPGPlayer rpgPlayer : rpgPlayers.values())
+		{
+			dataLoader.savePlayer(rpgPlayer);
+			this.rpgPlayers.remove(rpgPlayer);
+		}
+		
+		// Fin de desactivation du plugin
+		log.info("[MineteryaRPG] Le plugin est desactive");
 	}
 
 	

@@ -58,10 +58,14 @@ public class RPGPlayerListener extends PlayerListener
 		log.info("[MineteryaRPG] Deconnexion de : " + event.getPlayer().getName());
 		if (this.plugin.dataLoader.playerExist(event.getPlayer().getName()))
 		{
-			log.info("[MineteryaRPG] Sauvegarde de : " + event.getPlayer().getName());
-			this.plugin.dataLoader.savePlayer(event.getPlayer());
+			RPGPlayer rpgPlayer = this.plugin.rpgPlayers.get(event.getPlayer());
+			this.plugin.dataLoader.savePlayer(rpgPlayer);
 			this.plugin.rpgPlayers.remove(event.getPlayer());
 		}
 	}
+	
+	/**
+	 * 
+	 */
 
 }

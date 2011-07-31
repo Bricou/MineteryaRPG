@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.logging.Logger;
 
 import org.bukkit.entity.Player;
 
@@ -19,6 +20,7 @@ public class DataLoader
 	MineteryaRPG plugin;
 	Connection dbConnection;
 	String dbconn = "";
+	public Logger log = Logger.getLogger("Minecraft");
 
 	
 	/**
@@ -84,7 +86,7 @@ public class DataLoader
 
 	
 	/**
-	 * Création d'un joeur
+	 * Création d'un joueur
 	 * @param Player player : Instance du joueur
 	 * @param String classe : Classe du joueur
 	 */
@@ -149,23 +151,25 @@ public class DataLoader
 	 * Sauvegarde du joueur
 	 * @param Player player : Instance du joeur
 	 */
-	public void savePlayer(Player player)
+	public void savePlayer(RPGPlayer rpgPlayer)
 	{
 		try
 		{
 			dbConnection = DriverManager.getConnection(dbconn);
 			Statement statement = dbConnection.createStatement();
 
-			RPGPlayer rpgPlayer = this.plugin.rpgPlayers.get(player);
-
 			statement.executeUpdate("UPDATE players SET experience='" + rpgPlayer.getExperience() + "', level='" + rpgPlayer.getLevel() + "' WHERE name='" + rpgPlayer.getName() + "';");
 
 			statement.close();
 			dbConnection.close();
+			log.info("[MineteryaRPG] Sauvegarde du joueur : " + rpgPlayer.getName());
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
 }
