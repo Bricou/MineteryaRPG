@@ -5,7 +5,10 @@ version: 0.1
 commands:
     rpgaide:
         description: Affiche l'aide
-        usage: usage /rpgaide
+        usage: /rpgaide
     rpgclasse:
         description: Selection d'une classe
-        usage: usage /rpgclasse <nom de la classe>
+        usage: /rpgclasse <nom de la classe>
+    rpgstats:
+        description: Donne les informations d'un joueur
+        usage: /rpgstats [joueur]

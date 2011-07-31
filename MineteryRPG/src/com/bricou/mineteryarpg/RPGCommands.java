@@ -1,11 +1,14 @@
 package com.bricou.mineteryarpg;
 
+import java.util.logging.Logger;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class RPGCommands {
 	
 	MineteryaRPG plugin;
+	public Logger log = Logger.getLogger("Minecraft");
 	
 	public RPGCommands(MineteryaRPG instance)
 	{
@@ -52,19 +55,39 @@ public class RPGCommands {
 				}
 				else if (args[0].equalsIgnoreCase("guerrier"))
 				{
-					this.plugin.dataLoader.createPlayer(player.getName(), "guerrier");
+					this.plugin.dataLoader.playerCreate(player, "guerrier");
 					player.sendMessage(ChatColor.AQUA + "Vous avez choisi la classe guerrier !");
 					return true;
 				}
 				else if (args[0].equalsIgnoreCase("mage"))
 				{
-					this.plugin.dataLoader.createPlayer(player.getName(), "mage");
+					this.plugin.dataLoader.playerCreate(player, "mage");
 					player.sendMessage(ChatColor.AQUA + "Vous avez choisi la classe mage !");
 					return true;
 				}
 				player.sendMessage(ChatColor.AQUA + "Cette classe n'éxiste pas !");
 				return false;
 			}
+		}
+		else if (command.equalsIgnoreCase("rpgstats"))
+		{
+			if (args.length == 0)
+			{
+				//On affiche les stats du sender
+				log.info("toto");
+				RPGPlayer rpgPlayer = (RPGPlayer)this.plugin.rpgPlayers.get(player);
+				log.info("titi");
+				player.sendMessage(ChatColor.AQUA + "[MineteryaRPG] Informations personnage");
+				player.sendMessage(ChatColor.AQUA + "Classe : " + rpgPlayer.getClasse());
+				player.sendMessage(ChatColor.AQUA + "Niveau : " + String.valueOf(rpgPlayer.getLevel()));
+				return true;
+			}
+			else if (args.length == 1)
+			{
+				//On affiche les stats du joueur demandé
+				return true;
+			}
+			return false;
 		}
 		return false;
 	}

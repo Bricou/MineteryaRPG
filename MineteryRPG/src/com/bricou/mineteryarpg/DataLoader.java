@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import org.bukkit.entity.Player;
+
 public class DataLoader {
 	
 	MineteryaRPG plugin;
@@ -60,13 +62,16 @@ public class DataLoader {
 		}
 	}
 	
-	public boolean createPlayer(String player, String classe)
+	public void playerCreate(Player player, String classe)
 	{
 		try {
 			dbConnection = DriverManager.getConnection(dbconn);
 			Statement statement = dbConnection.createStatement();
 			
-			statement.executeUpdate("INSERT INTO `players` (`id`,`name`,`class`,`experience`,`level`) VALUES (NULL, '" + player + "', '" + classe + "', 0, 0);");
+			statement.executeUpdate("INSERT INTO `players` (`id`,`name`,`class`,`experience`,`level`) VALUES (NULL, '" + player.getName() + "', '" + classe + "', 0, 0);");
+			
+			this.playerLoad(player);
+			
 			statement.close();
 			dbConnection.close();
 		}
@@ -74,7 +79,41 @@ public class DataLoader {
 	    {
 			e.printStackTrace();
 	    }
-		return true;
+	}
+	
+	public void playerLoad(Player player)
+	{
+		try {
+			String info[] = { "", "", "", "" };
+			
+			dbConnection = DriverManager.getConnection(dbconn);
+			Statement statement = dbConnection.createStatement();
+			
+			ResultSet rs = statement.executeQuery("SELECT `name`, `class`, `experience`, `level` FROM players WHERE `name`='" + player.getName() + "';");
+			
+			while (rs.next())
+			{
+				info[0] = rs.getString("name");
+				info[1] = rs.getString("class");
+				info[2] = rs.getString("experience");
+				info[3] = rs.getString("level");
+			}
+			
+			RPGPlayer playerToAdd = new RPGPlayer(info, this.plugin);
+			this.plugin.rpgPlayers.put(player, playerToAdd);
+			
+			statement.close();
+			dbConnection.close();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void playerSave(String player)
+	{
+		
 	}
 	
 }

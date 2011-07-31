@@ -33,6 +33,11 @@ public class RPGPlayerListener extends PlayerListener {
 	public void onPlayerQuit(PlayerQuitEvent event)
 	{
 		log.info("[MineteryaRPG] Deconnexion de : " + event.getPlayer().getName());
+		if (this.plugin.dataLoader.playerExist(event.getPlayer().getName()))
+		{
+			log.info("[MineteryaRPG] Sauvegarde de : " + event.getPlayer().getName());
+			this.plugin.dataLoader.playerSave(event.getPlayer().getName());
+		}
 	}
 	
 }

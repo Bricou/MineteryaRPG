@@ -1,0 +1,25 @@
+org.bukkit.command.CommandException: Unhandled exception executing command 'rpgs
+tats' in plugin MineteryaRPG v0.1
+        at org.bukkit.command.PluginCommand.execute(PluginCommand.java:37)
+        at org.bukkit.command.SimpleCommandMap.dispatch(SimpleCommandMap.java:12
+9)
+        at org.bukkit.craftbukkit.CraftServer.dispatchCommand(CraftServer.java:2
+98)
+        at net.minecraft.server.NetServerHandler.handleCommand(NetServerHandler.
+java:711)
+        at net.minecraft.server.NetServerHandler.chat(NetServerHandler.java:676)
+
+        at net.minecraft.server.NetServerHandler.a(NetServerHandler.java:669)
+        at net.minecraft.server.Packet3Chat.a(Packet3Chat.java:33)
+        at net.minecraft.server.NetworkManager.b(NetworkManager.java:226)
+        at net.minecraft.server.NetServerHandler.a(NetServerHandler.java:84)
+        at net.minecraft.server.NetworkListenThread.a(SourceFile:105)
+        at net.minecraft.server.MinecraftServer.h(MinecraftServer.java:451)
+        at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:361)
+        at net.minecraft.server.ThreadServerApplication.run(SourceFile:422)
+Caused by: java.lang.NullPointerException
+        at com.bricou.mineteryarpg.RPGCommands.handleCommand(RPGCommands.java:81
+)
+        at com.bricou.mineteryarpg.MineteryaRPG.onCommand(MineteryaRPG.java:72)
+        at org.bukkit.command.PluginCommand.execute(PluginCommand.java:35)
+        ... 12 more

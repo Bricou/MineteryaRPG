@@ -17,4 +17,14 @@ public class RPGPlayer {
 		this.playerLevel = Integer.valueOf(data[3]);
 	}
 	
+	public String getClasse()
+	{
+		return this.playerClasse;
+	}
+	
+	public int getLevel()
+	{
+		return this.playerLevel;
+	}
+	
 }
