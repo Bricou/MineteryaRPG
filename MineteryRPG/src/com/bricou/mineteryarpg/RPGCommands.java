@@ -5,16 +5,36 @@ import java.util.logging.Logger;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class RPGCommands {
-	
+/**
+ * Gestion des commandes
+ * @author Bricou & Dr.Jack
+ *
+ */
+public class RPGCommands
+{
+
+	// DŽclaration
 	MineteryaRPG plugin;
 	public Logger log = Logger.getLogger("Minecraft");
+
 	
+	/**
+	 * Gestion des commandes
+	 * @param instance
+	 */
 	public RPGCommands(MineteryaRPG instance)
 	{
 		plugin = instance;
 	}
+
 	
+	/**
+	 * RŽcupŽration et traitement des commandes
+	 * @param String command :
+	 * @param Player player :
+	 * @param String[] args :
+	 * @return
+	 */
 	public boolean handleCommand(String command, Player player, String[] args)
 	{
 		if (command.equalsIgnoreCase("rpgaide"))
@@ -28,7 +48,7 @@ public class RPGCommands {
 			}
 			else if (args.length == 1)
 			{
-				if(args[0].equalsIgnoreCase("classes"))
+				if (args[0].equalsIgnoreCase("classes"))
 				{
 					player.sendMessage(ChatColor.AQUA + "[MineteryaRPG] Informations sur les classes");
 					player.sendMessage(ChatColor.AQUA + "Guerrier - Classe pouvant porter des coups puissants ou réduire les dégâts subis");
@@ -55,13 +75,13 @@ public class RPGCommands {
 				}
 				else if (args[0].equalsIgnoreCase("guerrier"))
 				{
-					this.plugin.dataLoader.playerCreate(player, "guerrier");
+					this.plugin.dataLoader.createPlayer(player, "guerrier");
 					player.sendMessage(ChatColor.AQUA + "Vous avez choisi la classe guerrier !");
 					return true;
 				}
 				else if (args[0].equalsIgnoreCase("mage"))
 				{
-					this.plugin.dataLoader.playerCreate(player, "mage");
+					this.plugin.dataLoader.createPlayer(player, "mage");
 					player.sendMessage(ChatColor.AQUA + "Vous avez choisi la classe mage !");
 					return true;
 				}
@@ -75,20 +95,22 @@ public class RPGCommands {
 			{
 				if (this.plugin.dataLoader.playerExist(player.getName()))
 				{
-					//On affiche les stats du sender
+					// On affiche les stats du sender
 					RPGPlayer rpgPlayer = this.plugin.rpgPlayers.get(player);
 					player.sendMessage(ChatColor.AQUA + "[MineteryaRPG] Informations personnage");
 					player.sendMessage(ChatColor.AQUA + "Classe : " + rpgPlayer.getClasse());
 					player.sendMessage(ChatColor.AQUA + "Niveau : " + String.valueOf(rpgPlayer.getLevel()));
 					return true;
-				} else {
+				}
+				else
+				{
 					player.sendMessage(ChatColor.AQUA + "Vous n'avez pas choisi de classe !");
 					return true;
 				}
 			}
 			else if (args.length == 1)
 			{
-				//On affiche les stats du joueur demandé
+				// On affiche les stats du joueur demandé
 				return true;
 			}
 			return false;
@@ -99,5 +121,5 @@ public class RPGCommands {
 		}
 		return false;
 	}
-	
+
 }

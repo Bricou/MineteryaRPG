@@ -8,16 +8,27 @@ import java.sql.Statement;
 
 import org.bukkit.entity.Player;
 
-public class DataLoader {
-	
+/**
+ * Classe de chargement et d'initialisation des données
+ * @author Bricou & Dr.Jack
+ *
+ */
+public class DataLoader
+{
+	// Déclaration
 	MineteryaRPG plugin;
 	Connection dbConnection;
 	String dbconn = "";
 
+	
+	/**
+	 * Mise en place de la BDD
+	 * @param MineteryaRPG instance : instance du plugin
+	 */
 	public DataLoader(MineteryaRPG instance)
 	{
 		this.plugin = instance;
-		//On crÈe la bdd si elle n'existe pas
+		// On crée la bdd si elle n'existe pas
 		try
 		{
 			Class.forName("org.sqlite.JDBC");
@@ -32,15 +43,22 @@ public class DataLoader {
 			e.printStackTrace();
 		}
 	}
+
 	
+	/**
+	 * Teste si le joueur existe dans la BDD
+	 * @param String player : Nom du joueur
+	 * @return boolean : true si le joueur existe
+	 */
 	public boolean playerExist(String player)
 	{
-		try {
+		try
+		{
 			int id = -1;
 			dbConnection = DriverManager.getConnection(dbconn);
 			Statement statement = dbConnection.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT `id` FROM `players` WHERE `name`='" + player + "';");
-			while (rs.next()) 
+			while (rs.next())
 			{
 				id = rs.getInt("id");
 			}
@@ -49,10 +67,12 @@ public class DataLoader {
 			dbConnection.close();
 			if (id >= 0)
 			{
-				//Le joueur existe
+				// Le joueur existe
 				return true;
-			} else {
-				//Le joueur n'existe pas
+			}
+			else
+			{
+				// Le joueur n'existe pas
 				return false;
 			}
 		}
@@ -61,36 +81,49 @@ public class DataLoader {
 			return false;
 		}
 	}
+
 	
-	public void playerCreate(Player player, String classe)
+	/**
+	 * Création d'un joeur
+	 * @param Player player : Instance du joueur
+	 * @param String classe : Classe du joueur
+	 */
+	public void createPlayer(Player player, String classe)
 	{
-		try {
+		try
+		{
 			dbConnection = DriverManager.getConnection(dbconn);
 			Statement statement = dbConnection.createStatement();
-			
+
 			statement.executeUpdate("INSERT INTO `players` (`id`,`name`,`class`,`experience`,`level`) VALUES (NULL, '" + player.getName() + "', '" + classe + "', 0, 0);");
-			
-			this.playerLoad(player);
-			
+
+			this.loadPlayer(player);
+
 			statement.close();
 			dbConnection.close();
 		}
-		catch (Exception e) 
-	    {
+		catch (Exception e)
+		{
 			e.printStackTrace();
-	    }
+		}
 	}
+
 	
-	public void playerLoad(Player player)
+	/**
+	 * Chargement du joueur
+	 * @param Player player : Instance du joueur
+	 */
+	public void loadPlayer(Player player)
 	{
-		try {
+		try
+		{
 			String info[] = { "", "", "", "" };
-			
+
 			dbConnection = DriverManager.getConnection(dbconn);
 			Statement statement = dbConnection.createStatement();
-			
+
 			ResultSet rs = statement.executeQuery("SELECT `name`, `class`, `experience`, `level` FROM players WHERE `name`='" + player.getName() + "';");
-			
+
 			while (rs.next())
 			{
 				info[0] = rs.getString("name");
@@ -98,10 +131,10 @@ public class DataLoader {
 				info[2] = rs.getString("experience");
 				info[3] = rs.getString("level");
 			}
-			
+
 			RPGPlayer playerToAdd = new RPGPlayer(info, this.plugin);
 			this.plugin.rpgPlayers.put(player, playerToAdd);
-			
+
 			statement.close();
 			dbConnection.close();
 		}
@@ -110,24 +143,29 @@ public class DataLoader {
 			e.printStackTrace();
 		}
 	}
+
 	
-	public void playerSave(Player player)
+	/**
+	 * Sauvegarde du joueur
+	 * @param Player player : Instance du joeur
+	 */
+	public void savePlayer(Player player)
 	{
-		try {
+		try
+		{
 			dbConnection = DriverManager.getConnection(dbconn);
 			Statement statement = dbConnection.createStatement();
-			
+
 			RPGPlayer rpgPlayer = this.plugin.rpgPlayers.get(player);
-			
+
 			statement.executeUpdate("UPDATE players SET experience='" + rpgPlayer.getExperience() + "', level='" + rpgPlayer.getLevel() + "' WHERE name='" + rpgPlayer.getName() + "';");
-			
+
 			statement.close();
-		    dbConnection.close();
+			dbConnection.close();
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
-	
 }
