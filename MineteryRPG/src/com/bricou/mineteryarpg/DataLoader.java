@@ -10,19 +10,18 @@ import java.util.logging.Logger;
 import org.bukkit.entity.Player;
 
 /**
- * Classe de chargement et d'initialisation des donnŽes
+ * Classe de chargement et d'initialisation des données
  * @author Bricou & Dr.Jack
- *
+ * 
  */
 public class DataLoader
 {
-	// DŽclaration
+	// Déclaration
 	MineteryaRPG plugin;
 	Connection dbConnection;
 	String dbconn = "";
 	public Logger log = Logger.getLogger("Minecraft");
 
-	
 	/**
 	 * Mise en place de la BDD
 	 * @param MineteryaRPG instance : instance du plugin
@@ -30,7 +29,28 @@ public class DataLoader
 	public DataLoader(MineteryaRPG instance)
 	{
 		this.plugin = instance;
-		// On crŽe la bdd si elle n'existe pas
+		// On créé l'environnement du plugin s'il n'existe pas
+		try
+		{
+			File mineteryaRPGFile = plugin.getDataFolder();
+			if (!mineteryaRPGFile.exists())
+			{
+				if (mineteryaRPGFile.mkdir())
+				{
+					plugin.log.info("[MineteryaRPG] Création du répertoire d'environnement");
+				}
+				else
+				{
+					plugin.log.severe("[MineteryaRPG] Erreur à la création du répertoire d'environnement");
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		// On crée la bdd si elle n'existe pas
 		try
 		{
 			Class.forName("org.sqlite.JDBC");
@@ -46,7 +66,6 @@ public class DataLoader
 		}
 	}
 
-	
 	/**
 	 * Teste si le joueur existe dans la BDD
 	 * @param String player : Nom du joueur
@@ -84,9 +103,8 @@ public class DataLoader
 		}
 	}
 
-	
 	/**
-	 * CrŽation d'un joueur
+	 * Création d'un joueur
 	 * @param Player player : Instance du joueur
 	 * @param String classe : Classe du joueur
 	 */
@@ -96,11 +114,8 @@ public class DataLoader
 		{
 			dbConnection = DriverManager.getConnection(dbconn);
 			Statement statement = dbConnection.createStatement();
-
 			statement.executeUpdate("INSERT INTO `players` (`id`,`name`,`class`,`experience`,`level`) VALUES (NULL, '" + player.getName() + "', '" + classe + "', 0, 0);");
-
 			this.loadPlayer(player);
-
 			statement.close();
 			dbConnection.close();
 		}
@@ -110,7 +125,6 @@ public class DataLoader
 		}
 	}
 
-	
 	/**
 	 * Chargement du joueur
 	 * @param Player player : Instance du joueur
@@ -123,7 +137,6 @@ public class DataLoader
 
 			dbConnection = DriverManager.getConnection(dbconn);
 			Statement statement = dbConnection.createStatement();
-
 			ResultSet rs = statement.executeQuery("SELECT `name`, `class`, `experience`, `level` FROM players WHERE `name`='" + player.getName() + "';");
 
 			while (rs.next())
@@ -146,7 +159,6 @@ public class DataLoader
 		}
 	}
 
-	
 	/**
 	 * Sauvegarde du joueur
 	 * @param Player player : Instance du joeur
@@ -169,7 +181,5 @@ public class DataLoader
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
 }

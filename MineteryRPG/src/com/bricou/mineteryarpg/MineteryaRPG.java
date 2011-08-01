@@ -14,23 +14,21 @@ import org.bukkit.plugin.PluginManager;
 /**
  * Plugin de gestion RPG pour Mineterya (Bukkit)
  * @author Bricou & Dr.Jack
- *
+ * 
  */
 public class MineteryaRPG extends JavaPlugin
 {
 
-	// DŽclaration
+	// Déclaration
 	private PluginManager pluginManager;
 	public RPGPlayerListener playerListener;
 	public DataLoader dataLoader;
 	public RPGCommands rpgCommands;
-	public HashMap<Player, RPGPlayer> rpgPlayers = new HashMap<Player, RPGPlayer>(); // Need explication
-	
-	
+	public HashMap<Player, RPGPlayer> rpgPlayers = new HashMap<Player, RPGPlayer>(); 
+																					
 	// Initialisation du logger
 	public Logger log = Logger.getLogger("Minecraft");
 
-	
 	/**
 	 * Initialisation du plugin
 	 */
@@ -40,7 +38,7 @@ public class MineteryaRPG extends JavaPlugin
 
 		// Initialisation du contexte
 		pluginManager = getServer().getPluginManager();
-		playerListener = new RPGPlayerListener(this); 
+		playerListener = new RPGPlayerListener(this);
 		dataLoader = new DataLoader(this);
 		rpgCommands = new RPGCommands(this);
 
@@ -49,65 +47,63 @@ public class MineteryaRPG extends JavaPlugin
 		pluginManager.registerEvent(Type.PLAYER_QUIT, playerListener, Priority.Normal, this);
 		pluginManager.registerEvent(Type.ENTITY_DEATH, playerListener, Priority.Normal, this);
 
-		// On charge les donnŽes de joueurs dŽjˆ connectŽs
+		// On charge les données de joueurs déjà connectés
 		for (Player player : getServer().getOnlinePlayers())
 		{
 			if (this.dataLoader.playerExist(player.getName()))
 			{
-				// Le joueur existe, chargement des donnŽes
+				// Le joueur existe, chargement des données
 				log.info("[MineteryaRPG] Le joueur " + player.getName() + " est connectŽ");
 				this.dataLoader.loadPlayer(player);
 			}
 			else
 			{
 				// Le joueur n'existe pas
-				log.info("[MineteryaRPG] Le joueur " + player.getName() + " n'existe pas dans la base de donnŽes");
+				log.info("[MineteryaRPG] Le joueur " + player.getName() + " n'existe pas dans la base de données");
 			}
 		}
 
 		// Fin du chargement du plugin
-		log.info("[MineteryaRPG] Le plugin est chargŽ");
+		log.info("[MineteryaRPG] Le plugin est chargé");
 	}
 
-	
 	/**
-	 * DŽsactivation du plugin
+	 * Désactivation du plugin
 	 */
 	public void onDisable()
 	{
 		log.info("[MineteryaRPG] Desactivation du plugin");
-		
-		// On parcours la liste des RPGPlayer pour les sauvegarder et les decharger
+
+		// On parcours la liste des RPGPlayer pour les sauvegarder et les décharger
 		for (RPGPlayer rpgPlayer : rpgPlayers.values())
 		{
 			dataLoader.savePlayer(rpgPlayer);
 			this.rpgPlayers.remove(rpgPlayer);
 		}
-		
-		// Fin de desactivation du plugin
+
+		// Fin de désactivation du plugin
 		log.info("[MineteryaRPG] Le plugin est desactive");
 	}
 
-	
 	/**
 	 * Traitement des commandes
-	 * @param CommandSender sender : Objet ayant Žmis la commande
-	 * @param Comman cmd : Commande Žmise
+	 * @param CommandSender sender : Objet ayant émis la commande
+	 * @param Command cmd : Commande émise
 	 * @param String commandLabel : Label de la commande
-	 * @param String args[] : Tableau d'arguments passŽs ˆ la commande
-	 * @return boolean onCommand : La commande a correctement ŽtŽ traitŽe
+	 * @param String args[] : Tableau d'arguments passés à la commande
+	 * @return boolean onCommand : true si la commande a correctement été traitée
 	 */
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
 	{
-		// VŽrification que la commande provient d'un joueur
+		// Vérification que la commande provient d'un joueur
 		if (!(sender instanceof Player))
 		{
 			// La commande ne provient pas d'un joueur
 			return false;
 		}
-		
-		// RŽcupŽration et exŽcution de la commande
-		String command = cmd.getName(); 
+
+		// Récupération et exécution de la commande
+		String command = cmd.getName();
 		Player player = (Player) sender;
 		/** @todo gestion des droits */
 		return this.rpgCommands.handleCommand(command, player, args);

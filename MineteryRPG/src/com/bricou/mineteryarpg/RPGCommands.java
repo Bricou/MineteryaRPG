@@ -8,32 +8,30 @@ import org.bukkit.entity.Player;
 /**
  * Gestion des commandes
  * @author Bricou & Dr.Jack
- *
+ * 
  */
 public class RPGCommands
 {
 
-	// DŽclaration
+	// Déclaration
 	MineteryaRPG plugin;
 	public Logger log = Logger.getLogger("Minecraft");
 
-	
 	/**
 	 * Gestion des commandes
-	 * @param instance
+	 * @param Mineterya instance : instance du plugin
 	 */
 	public RPGCommands(MineteryaRPG instance)
 	{
 		plugin = instance;
 	}
 
-	
 	/**
-	 * RŽcupŽration et traitement des commandes
-	 * @param String command :
-	 * @param Player player :
-	 * @param String[] args :
-	 * @return
+	 * RécupŽration et traitement des commandes
+	 * @param String command : commande passée par le joueur
+	 * @param Player player : objet joueur
+	 * @param String [] args : arguments passés dans la commande du joueur
+	 * @return boolean : true si la commande a été correctement traitée
 	 */
 	public boolean handleCommand(String command, Player player, String[] args)
 	{

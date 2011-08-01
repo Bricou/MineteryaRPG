@@ -7,21 +7,20 @@ import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 /**
- * Crochet d'événements par le joueur
+ * Crochet d'ÈvÈnements par le joueur
  * @author Bricou & Dr.Jack
- *
+ * 
  */
 public class RPGPlayerListener extends PlayerListener
 {
 
-	// Déclaration
+	// DÈclaration
 	MineteryaRPG plugin;
 	public Logger log = Logger.getLogger("Minecraft");
 
-	
 	/**
-	 * Ecoute des événements du joueur
-	 * @param MineteryaRPG instance : instance du plugin 
+	 * Ecoute des ÈvÈnements du joueur
+	 * @param MineteryaRPG instance : instance du plugin
 	 */
 	public RPGPlayerListener(MineteryaRPG instance)
 	{
@@ -29,10 +28,9 @@ public class RPGPlayerListener extends PlayerListener
 
 	}
 
-	
 	/**
-	 * Détection de la connection du joueur
-	 * @param PlayerJoinEvent event : événement de connexion du joueur
+	 * DÈtection de la connection du joueur
+	 * @param PlayerJoinEvent event : ÈvÈnement de connexion du joueur
 	 */
 	public void onPlayerJoin(PlayerJoinEvent event)
 	{
@@ -48,10 +46,9 @@ public class RPGPlayerListener extends PlayerListener
 		}
 	}
 
-	
 	/**
-	 * Détection de la déconnection du joueur
-	 * @param PlayerQuitEvent : événement de déconnexion du joueur
+	 * DÈtection de la dÈconnection du joueur
+	 * @param PlayerQuitEvent : ÈvÈnement de déconnexion du joueur
 	 */
 	public void onPlayerQuit(PlayerQuitEvent event)
 	{
@@ -63,9 +60,5 @@ public class RPGPlayerListener extends PlayerListener
 			this.plugin.rpgPlayers.remove(event.getPlayer());
 		}
 	}
-	
-	/**
-	 * 
-	 */
 
 }

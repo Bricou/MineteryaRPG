@@ -2,23 +2,23 @@ package com.bricou.mineteryarpg;
 
 /**
  * EntitŽ joueur
+ * 
  * @author Bricou & Dr.Jack
- *
+ * 
  */
 public class RPGPlayer
 {
 
-	// DŽclaration
+	// Déclaration
 	private MineteryaRPG plugin;
 	private String playerName;
 	private String playerClasse;
 	private float playerExperience;
 	private int playerLevel;
 
-	
 	/**
-	 * CrŽation du joueur
-	 * @param data
+	 * Création du joueur
+	 * @param String[] data : caractéristiques du joueur
 	 * @param instance
 	 */
 	public RPGPlayer(String[] data, MineteryaRPG instance)
@@ -30,9 +30,8 @@ public class RPGPlayer
 		this.playerLevel = Integer.valueOf(data[3]);
 	}
 
-	
 	/**
-	 * RŽcupŽration de la classe du joueur
+	 * Récupération de la classe du joueur
 	 * @return String : Classe du joueur
 	 */
 	public String getClasse()
@@ -40,9 +39,8 @@ public class RPGPlayer
 		return this.playerClasse;
 	}
 
-	
 	/**
-	 * RŽcupŽration du niveau du joueur
+	 * Récupération du niveau du joueur
 	 * @return int : Niveau du joueur
 	 */
 	public int getLevel()
@@ -50,19 +48,17 @@ public class RPGPlayer
 		return this.playerLevel;
 	}
 
-	
 	/**
-	 * RŽcupŽration du niveau d'expŽrience du joueur
-	 * @return float : Niveau d'expŽrience du joueur
+	 * Récupération du niveau d'expérience du joueur
+	 * @return float : Niveau d'expérience du joueur
 	 */
 	public float getExperience()
 	{
 		return this.playerExperience;
 	}
 
-	
 	/**
-	 * RŽcupŽration du nom du joueur
+	 * Récupération du nom du joueur
 	 * @return String : Nom du joueur
 	 */
 	public String getName()
