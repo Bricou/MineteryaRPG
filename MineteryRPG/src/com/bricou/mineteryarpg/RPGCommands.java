@@ -27,7 +27,7 @@ public class RPGCommands
 	}
 
 	/**
-	 * Récupration et traitement des commandes
+	 * Récupération et traitement des commandes
 	 * @param String command : commande passée par le joueur
 	 * @param Player player : objet joueur
 	 * @param String [] args : arguments passés dans la commande du joueur

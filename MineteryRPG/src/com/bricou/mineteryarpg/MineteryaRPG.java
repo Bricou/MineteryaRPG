@@ -45,7 +45,7 @@ public class MineteryaRPG extends JavaPlugin
 		// Enregistrement des events
 		pluginManager.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
 		pluginManager.registerEvent(Type.PLAYER_QUIT, playerListener, Priority.Normal, this);
-		pluginManager.registerEvent(Type.ENTITY_DEATH, playerListener, Priority.Normal, this);
+		//pluginManager.registerEvent(Type.ENTITY_DEATH, playerListener, Priority.Normal, this);
 
 		// On charge les données de joueurs déjà connectés
 		for (Player player : getServer().getOnlinePlayers())

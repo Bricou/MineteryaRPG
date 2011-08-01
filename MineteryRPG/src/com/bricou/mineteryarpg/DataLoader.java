@@ -5,8 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.logging.Logger;
-
 import org.bukkit.entity.Player;
 
 /**
@@ -17,9 +17,11 @@ import org.bukkit.entity.Player;
 public class DataLoader
 {
 	// Déclaration
-	MineteryaRPG plugin;
-	Connection dbConnection;
-	String dbconn = "";
+	public MineteryaRPG plugin;
+	public Connection dbConnection;
+	public String dbconn = "";
+	public PluginConfigFile configFile;
+	public HashMap<String,String> configFileMap;
 	public Logger log = Logger.getLogger("Minecraft");
 
 	/**
@@ -29,9 +31,12 @@ public class DataLoader
 	public DataLoader(MineteryaRPG instance)
 	{
 		this.plugin = instance;
+		this.configFile = new PluginConfigFile();
+		this.configFileMap = new HashMap<String,String>();
 		// On créé l'environnement du plugin s'il n'existe pas
 		try
 		{
+			// Contrôle/Création du répertoire du plugin
 			File mineteryaRPGFile = plugin.getDataFolder();
 			if (!mineteryaRPGFile.exists())
 			{
@@ -43,6 +48,21 @@ public class DataLoader
 				{
 					plugin.log.severe("[MineteryaRPG] Erreur à la création du répertoire d'environnement");
 				}
+			}
+			
+			// Contrôle/Création du fichier de paramétrage du plugin
+			File mineteryaConfigFile = new File(plugin.getDataFolder() + File.separator + "MineteryaRPG.properties");
+			if (!mineteryaConfigFile.exists())
+			{
+				// Le fichier de configuration n'existe pas, création du fichier par défaut
+				plugin.log.info("[MineteryaRPG] Création du fichier de configuration du plugin par défaut");
+				configFileMap = configFile.initializeProperties(mineteryaConfigFile);
+			}
+			else
+			{
+				// Le fichier de configuration existe, chargement du paramétrage du plugin
+				plugin.log.info("[MineteryaRPG] Chargement du fichier de configuration du plugin");
+				configFileMap = configFile.loadProperties(mineteryaConfigFile);
 			}
 		}
 		catch(Exception e)

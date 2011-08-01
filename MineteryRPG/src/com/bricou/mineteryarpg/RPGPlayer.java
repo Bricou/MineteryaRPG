@@ -1,8 +1,7 @@
 package com.bricou.mineteryarpg;
 
 /**
- * EntitŽ joueur
- * 
+ * Entité joueur
  * @author Bricou & Dr.Jack
  * 
  */
