@@ -45,10 +45,10 @@ public class PluginConfigFile
 	 */
 	public HashMap<String,String> loadProperties(File configFile)
 	{
+		HashMap<String,String> configMap = new HashMap<String,String>();
 		try 
 		{
 			// Lecture en boucle sur le fichier de paramétrage du plugin
-			HashMap<String,String> configMap = new HashMap<String,String>();
 			BufferedReader reader = new BufferedReader(new FileReader(configFile));
 			String line = null;
 			while ((line = reader.readLine()) != null)
@@ -66,7 +66,7 @@ public class PluginConfigFile
 		{
 			e.printStackTrace();
 		}
-		return null;
+		return configMap;
 	}
 	
 }
