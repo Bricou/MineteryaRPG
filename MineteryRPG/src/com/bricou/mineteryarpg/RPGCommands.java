@@ -94,10 +94,12 @@ public class RPGCommands
 				if (this.plugin.dataLoader.playerExist(player.getName()))
 				{
 					// On affiche les stats du sender
+					Bargraph bargraph = new Bargraph();
 					RPGPlayer rpgPlayer = this.plugin.rpgPlayers.get(player);
 					player.sendMessage(ChatColor.AQUA + "[MineteryaRPG] Informations personnage");
 					player.sendMessage(ChatColor.AQUA + "Classe : " + rpgPlayer.getClasse());
-					player.sendMessage(ChatColor.AQUA + "Niveau : " + String.valueOf(rpgPlayer.getLevel()));
+					//player.sendMessage(ChatColor.AQUA + "Niveau : " + String.valueOf(rpgPlayer.getLevel()));
+					player.sendMessage(ChatColor.AQUA + "Niveau : " + bargraph.generate(rpgPlayer.getLevel()));
 					return true;
 				}
 				else
