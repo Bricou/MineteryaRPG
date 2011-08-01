@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<project name="MineteryaRPG" default="compile">
+   
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="bin"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir" value="${build.dir}/jar"/>
+    <property name="lib.dir" value="lib"/>
+   
+    <target name="clean">
+        <delete dir="${classes.dir}"/>
+        <delete dir="${build.dir}"/>
+    </target>
+   
+    <target name="compile" depends="clean">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpath="${lib.dir}/craftbukkit-0.0.1-SNAPSHOT.jar" includeAntRuntime="false"/>
+        <copy file="${src.dir}/plugin.yml" todir="${classes.dir}"/>
+        <jar destfile="${jar.dir}/MineteryaRPG.jar" basedir="${classes.dir}"/>
+    </target>
+
+</project>
