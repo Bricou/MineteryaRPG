@@ -10,7 +10,7 @@ public class Bargraph
 	public Bargraph()
 	{
 		super();
-	}
+ 	}
 	
 	public String generate(int value)
 	{
@@ -22,9 +22,9 @@ public class Bargraph
 			{
 				bargraph.append("+");
 			}
-			else if (i==value)
+			else if (i<value)
 			{
-				bargraph.append("X");
+				bargraph.append("#");
 			}
 			else
 			{

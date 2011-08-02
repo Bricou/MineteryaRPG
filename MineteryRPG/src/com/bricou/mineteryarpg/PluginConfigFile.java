@@ -16,7 +16,7 @@ public class PluginConfigFile
 {
 	
 	public PluginConfigFile()
-	{
+	{  
 		super();
 	}
 	
@@ -34,7 +34,7 @@ public class PluginConfigFile
 			out.newLine();
 			out.write("#Principe :  paramètre:valeur");
 		    out.newLine();
-		    out.write("LevelMax:50");
+		    out.write("LevelMax:20");
             out.close();
 		}
 		catch (Exception e)

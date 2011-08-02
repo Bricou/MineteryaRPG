@@ -53,7 +53,7 @@ public class MineteryaRPG extends JavaPlugin
 			if (this.dataLoader.playerExist(player.getName()))
 			{
 				// Le joueur existe, chargement des données
-				log.info("[MineteryaRPG] Le joueur " + player.getName() + " est connectŽ");
+				log.info("[MineteryaRPG] Le joueur " + player.getName() + " est connecté");
 				this.dataLoader.loadPlayer(player);
 			}
 			else

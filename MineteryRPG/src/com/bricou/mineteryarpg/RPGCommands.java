@@ -39,9 +39,14 @@ public class RPGCommands
 		{
 			if (args.length == 0)
 			{
+				player.sendMessage(ChatColor.AQUA + "+---------------------------------------------------+");
+				player.sendMessage(ChatColor.AQUA + "+ Mineterya RPG V1.0 par Bricou & Dr.Jack (08/2011)           +");
+				player.sendMessage(ChatColor.AQUA + "+---------------------------------------------------+");
 				player.sendMessage(ChatColor.AQUA + "[MineteryaRPG] Aide");
 				player.sendMessage(ChatColor.AQUA + "/rpgaide - Affiche ce menu");
-				player.sendMessage(ChatColor.AQUA + "/rpgaide classes - Affiche les informations à propos des classes");
+				player.sendMessage(ChatColor.AQUA + "/rpgaide classes - Affiche les informations de classes");
+				player.sendMessage(ChatColor.AQUA + "/rpgstats - Affiche les statistiques du joueur");
+				player.sendMessage(ChatColor.AQUA + "/rpgclasse [classe] - affecte une classe au joueur");
 				return true;
 			}
 			else if (args.length == 1)
