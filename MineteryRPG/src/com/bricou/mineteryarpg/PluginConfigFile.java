@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 public class PluginConfigFile
 {
-	
+
 	public PluginConfigFile()
 	{  
 		super();
